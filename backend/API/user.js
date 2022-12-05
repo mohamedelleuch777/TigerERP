@@ -15,7 +15,7 @@ const  login =   async (req, res) => {
         }
         const userObj = user[0];
         delete userObj.Password;
-        const token = jwt.sign(userObj, process.env.JWT_SECRET, {expiresIn: '7d'});
+        const token = jwt.sign(userObj, process.env.JWT_SECRET, {expiresIn: process.env.TOKEN_EXPIRE});
         res.json({
             success: true,
             message: "User logged in successfully",
@@ -34,30 +34,38 @@ const register = async (req, res) => {
     const data = req.body;
     const hashedPassword= await SHA256(data.password).toString();
     try {
-        const userExist = await User.findOne({
-            email: data.email
-        });
-        if(userExist) {
-            throw new Error("Email already exists")
-        }
         req.body.password = hashedPassword;
-        const newUser = new User(data);
-        const saveResult = await newUser.save();
-        const userList = await User.findOne({
-            email: data.email
-        });
-        const newObject = JSON.parse(JSON.stringify(userList));
-        delete newObject.password;
-        const token = jwt.sign(newObject, process.env.JWT_SECRET, {expiresIn: '7d'});
-        saveResult.password = ""; // remove password before sending back the data to the client
-        userList.password = ""; // remove password before sending back the data to the client
+        const newUser = req.body;
+        if(!newUser.username) {
+            throw new Error("username is missing")
+        }
+        else if(!newUser.password) {
+            throw new Error("password is missing")
+        }
+        else if(!newUser.worker_id) {
+            throw new Error("worker_id is missing")
+        }
+
+
+
+
+        const sql_code = `INSERT INTO \`User\` (\`Id\`,\`Password\`,\`Username\`,\`WorkerId\`)  
+                          VALUES(NULL,'${newUser.password}','${newUser.username}',${newUser.worker_id})      `;
+        const result = await SQL_Query(sql_code);
+        if(result.affectedRows===0) {
+            throw new Error("Unknown error occured. User was not added.")
+        }
+
+        const newUserObject = {
+            id: result.insertId,
+            username: newUser.username,
+            worker_id: newUser.worker_id
+        }
+        const token = jwt.sign(newUserObject, process.env.JWT_SECRET, {expiresIn: process.env.TOKEN_EXPIRE});
         res.json({
-            result: token,
-            result_message: {
-                type: "success",
-                title: "Success",
-                message: "Account created Successfully"
-            }
+            success: true,
+            message: "Account created Successfully",
+            token: token
         });
     } catch (err) {
         res.json({
@@ -118,10 +126,11 @@ const deleteOneUser = async(req, res)=>{
 
 const  getAllUser =   async (req, res) => { // only for test purposes
     try {
-        const users = await User.find();                                   
+        const sql_code = `SELECT * FROM \`User\``;
+        const userList = await SQL_Query(sql_code);                                 
         res.json({                            
             success: true,                       
-            data: users                                          
+            data: userList                                          
         });                                  
     } catch (err) {                                   
         res.json({                           

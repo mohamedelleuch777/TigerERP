@@ -1,9 +1,9 @@
 CREATE TABLE`Client` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`Frist Name` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
 	`Last Name` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000',
+	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
+	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000' UNIQUE,
 	`Address` VARCHAR(100) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`District` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`Province` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
@@ -15,10 +15,10 @@ CREATE TABLE`Client` (
 );
 
 CREATE TABLE`Supplier` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`Name` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000',
+	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
+	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000' UNIQUE,
 	`Address` VARCHAR(100) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`District` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`Province` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
@@ -30,8 +30,8 @@ CREATE TABLE`Supplier` (
 );
 
 CREATE TABLE`Product` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Code` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`Code` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
 	`Origin` VARCHAR(2000) CHARACTER SET armscii8 COLLATE armscii8_bin,
 	`Designation` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
 	`Description` VARCHAR(250) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE`Product` (
 );
 
 CREATE TABLE`Stock` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`Date` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
 	`ProductId` INT(16) unsigned zerofill DEFAULT '0',
 	`Quantity` INT(16) unsigned zerofill DEFAULT '0',
@@ -55,20 +55,20 @@ CREATE TABLE`Stock` (
 );
 
 CREATE TABLE`User` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Username` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+	`Username` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
 	`Password` VARCHAR(513) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
-	`WorkerId` INT(16) unsigned zerofill DEFAULT '0',
+	`WorkerId` INT(16) unsigned zerofill DEFAULT '0' UNIQUE,
 	PRIMARY KEY (`Id`,`Username`,`WorkerId`)
 );
 
 CREATE TABLE`Worker` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 	`Frist Name` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
 	`Last Name` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`NID` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin,
-	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000',
+	`NID` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
+	`Email` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
+	`Phone` INT(16) unsigned zerofill DEFAULT '0000000000' UNIQUE,
 	`Address` VARCHAR(100) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`District` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`Province` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
