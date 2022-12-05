@@ -1,0 +1,19 @@
+{
+  "name": "tiger_erp",
+  "version": "1.0.0",
+  "description": "erp application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedelleuch777/TigerERP.git"
+  },
+  "author": "Mohamed Elleuch - Maha Bahloul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohamedelleuch777/TigerERP/issues"
+  },
+  "homepage": "https://github.com/mohamedelleuch777/TigerERP#readme"
+}
