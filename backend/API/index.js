@@ -20,8 +20,8 @@ router.use(requireAuth)
 **************************************************
 **************************************************
 */
-// router.get('/user', getAllUser);
-// router.post('/user', login);
+router.get('/user', getAllUser);
+router.post('/user', login);
 // router.put('/user', register);
 // router.patch('/user', updateOneUser )
 // router.delete('/user', deleteOneUser)

@@ -2,44 +2,29 @@
 var SHA256 = require("crypto-js/sha256");
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
-
-// const User = require('../../models/users');
+const { SQL_Query } = require('./middleware/requireMySql');
 
 const  login =   async (req, res) => { 
     const data = req.body;
     const hashedPassword= await SHA256(data.password).toString();
     try {
-        const userList = await User.findOne({
-            email: data.email,
-            password: hashedPassword
-        });
-        if(!userList) {
+        const sql_code = `SELECT * FROM \`User\` WHERE \`Username\`='${data.username}' AND \`Password\`='${hashedPassword}'`;
+        const user = await SQL_Query(sql_code);
+        if(user.length===0) {
             throw new Error("Invalid Credentials, Please check your email/password and try again")
         }
-        const newObject = JSON.parse(JSON.stringify(userList));
-        delete newObject.password;
-        const token = jwt.sign(newObject, process.env.JWT_SECRET, {expiresIn: '7d'});
+        const userObj = user[0];
+        delete userObj.Password;
+        const token = jwt.sign(userObj, process.env.JWT_SECRET, {expiresIn: '7d'});
         res.json({
-            result: token,
-            result_message: {
-                type: "success",
-                title: "Success",
-                message: "User logged in successfully"
-            }
+            success: true,
+            message: "User logged in successfully",
+            token: token
         });                                 
     } catch (err) {
         res.json({
-            result: null,
-            result_message: {
-                type: "error",
-                message: "something went wrong, please try again later",
-                title: "Error",
-                privateBackend: {
-                    type:  "BadRequestError",
-                    message: err._message ? err._message : err.message,
-                    title: "Bad request"
-                }
-            }
+            success: false,
+            message: err._message ? err._message : err.message
         });
     }
 }
@@ -76,17 +61,8 @@ const register = async (req, res) => {
         });
     } catch (err) {
         res.json({
-            result: null,
-            result_message: {
-                type: "error",
-                message: "something went wrong, please try again later",
-                title: "Error",
-                privateBackend: {
-                    type:  "BadRequestError",
-                    message: err._message ? err._message : err.message,
-                    title: "Bad request"
-                }
-            }
+            success: false,
+            message: err._message ? err._message : err.message
         });
     }
 };

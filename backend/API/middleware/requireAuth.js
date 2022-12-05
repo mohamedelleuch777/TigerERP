@@ -3,7 +3,7 @@ require('dotenv/config');
 
 const requireAuth = (req, res, next) => {
     try {
-        if (req.path.startsWith('/home') && ['GET','POST','PUT'].includes(req.method)) {
+        if (req.path.startsWith('/user') && ['GET','POST','PUT'].includes(req.method)) {
             next()
         } else {
             if(req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
@@ -22,17 +22,8 @@ const requireAuth = (req, res, next) => {
         }
     } catch (err) {
         res.json({
-            result: null,
-            result_message: {
-                type: "error",
-                message: "something went wrong, please try again later",
-                title: "Error",
-                privateBackend: {
-                    type:  "BadRequestError",
-                    message: err._message ? err._message : err.message,
-                    title: "Bad request"
-                }
-            }
+            result: false,
+            message: err._message ? err._message : err.message,
         });
     }
 }
