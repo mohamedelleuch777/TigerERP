@@ -3,9 +3,7 @@ require('dotenv/config');
 
 const requireAuth = (req, res, next) => {
     try {
-        if (req.path.startsWith('/auth') && ['GET','POST','PUT'].includes(req.method)) {
-            next()
-        } else if (req.path.startsWith('/user') && ['GET','POST','PUT'].includes(req.method)) {
+        if (req.path.startsWith('/home') && ['GET','POST','PUT'].includes(req.method)) {
             next()
         } else {
             if(req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {

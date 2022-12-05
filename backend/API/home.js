@@ -1,76 +1,86 @@
 "use strict";
 require('dotenv/config');
+const mysql = require("mysql")
 
-const User = require('../../models/users');
-const Room = require('../../models/room');
-const Building = require('../../models/building');
-
+const con = mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user:  process.env.MYSQL_USER,
+    password:  process.env.MYSQL_PASSWORD,
+    database:  process.env.MYSQL_DB
+  });
 
 const getHome = async(req, res)=>{
     try {
-        const userData = req.decodeToken;
-        let fav_room = [];
-        if(userData.favorites) {
-            let arr = userData.favorites.split(',');
-            fav_room = await Promise.all(arr.map( async (it, i) => {
-                let room = await Room.findOne({ _id: it });
-                let building = await Building.findOne({ _id: room.buildingId });
-                if(room) {
-                    return {
-                        id: room.id,
-                        name: room.roomName,
-                        type: "ROOM_MATE",
-                        is_available: room.active,
-                        limit: room.available_count,
-                        price_description: null,
-                        is_favorite: true,
-                        build_name: building.buildingName,
-                        // medias: room.roomPicture || null,
-                        // location: null
-                        medias: i==0?media1:media2,
-                        location: {
-                          name: "etkinlik alanı 1",
-                          image: {
-                            type: "IMAGE",
-                            thumb: "https://www.pngitem.com/pimgs/m/415-4155818_thumb-image-meeting-room-png-transparent-png.png",
-                            width: 1198,
-                            height: 748,
-                            url: "https://www.sustainableplaces.eu/wp-content/uploads/2017/02/SmartBuilding.jpg"
-                          },
-                          "latitude": 123.23232,
-                          "longitude": 42.123
-                        }
+        con.connect(function(err) {
+            if (err) throw err;
+            con.query("SELECT * FROM `Worker` WHERE `id`=2", function (err, result, fields) {
+              if (err) throw err;
+              res.json(result);
+            });
+        });
+        // const userData = req.decodeToken;
+        // let fav_room = [];
+        // if(userData.favorites) {
+        //     let arr = userData.favorites.split(',');
+        //     fav_room = await Promise.all(arr.map( async (it, i) => {
+        //         let room = await Room.findOne({ _id: it });
+        //         let building = await Building.findOne({ _id: room.buildingId });
+        //         if(room) {
+        //             return {
+        //                 id: room.id,
+        //                 name: room.roomName,
+        //                 type: "ROOM_MATE",
+        //                 is_available: room.active,
+        //                 limit: room.available_count,
+        //                 price_description: null,
+        //                 is_favorite: true,
+        //                 build_name: building.buildingName,
+        //                 // medias: room.roomPicture || null,
+        //                 // location: null
+        //                 medias: i==0?media1:media2,
+        //                 location: {
+        //                   name: "etkinlik alanı 1",
+        //                   image: {
+        //                     type: "IMAGE",
+        //                     thumb: "https://www.pngitem.com/pimgs/m/415-4155818_thumb-image-meeting-room-png-transparent-png.png",
+        //                     width: 1198,
+        //                     height: 748,
+        //                     url: "https://www.sustainableplaces.eu/wp-content/uploads/2017/02/SmartBuilding.jpg"
+        //                   },
+        //                   "latitude": 123.23232,
+        //                   "longitude": 42.123
+        //                 }
         
-                    }
-                } else {
-                    return null
-                }
-            }));
-        }
+        //             }
+        //         } else {
+        //             return null
+        //         }
+        //     }));
+        // }
         
-		res.json({
-            result: {
-                unread_notification_count: 3,
-                latest_resarvation: l_res,
-                latest_notifications: [
-                    notif_1,
-                    notif_1
-                ],
-                populer_events: [
-                    event_1
-                ],
-                populer_room_mates: fav_room,
-                favorites: fav_room
+		// res.json({
+        //     result: {
+        //         unread_notification_count: 3,
+        //         latest_resarvation: l_res,
+        //         latest_notifications: [
+        //             notif_1,
+        //             notif_1
+        //         ],
+        //         populer_events: [
+        //             event_1
+        //         ],
+        //         populer_room_mates: fav_room,
+        //         favorites: fav_room
 
 
 
                 
-            },
-            result_message: {
-                type: "success",
-                message: "Home başarılı bir şekilde çekildi"
-            }
-        });
+        //     },
+        //     result_message: {
+        //         type: "success",
+        //         message: "Home başarılı bir şekilde çekildi"
+        //     }
+        // });
     } catch (err) {
         res.json({
             result: null,

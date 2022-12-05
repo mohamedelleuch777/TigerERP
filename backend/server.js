@@ -4,7 +4,7 @@ const bodyPareser = require('body-parser');
 const cors = require('cors');
 require('dotenv/config');
 
-// const cmsFunctions = require('./API/cms/index.js');
+const apiList = require('./API/index.js');
 // const phoneFunctions = require('./API/phone/index.js');
 
 const app = express();
@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 app.use(bodyPareser.json());
 // app.use('/cms', cmsFunctions);
-// app.use('/mobile', phoneFunctions);
+app.use('/', apiList);
 
 const port = 5000;
 

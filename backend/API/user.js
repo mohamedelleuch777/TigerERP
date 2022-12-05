@@ -3,7 +3,7 @@ var SHA256 = require("crypto-js/sha256");
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-const User = require('../../models/users');
+// const User = require('../../models/users');
 
 const  login =   async (req, res) => { 
     const data = req.body;
