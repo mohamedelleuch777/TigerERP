@@ -54,5 +54,17 @@ CREATE TABLE `Product` (
 
 
 
+CREATE TABLE `Stock` (
+	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Date` VARCHAR(40) CHARACTER SET armscii8 COLLATE armscii8_bin,
+	`ProductId` INT(16) unsigned zerofill DEFAULT '0',
+	`Quantity` INT(16) unsigned zerofill DEFAULT '0',
+	`PriceExclTaxes` DOUBLE(20) unsigned zerofill DEFAULT '0.00',
+	`UserId` INT(16) unsigned zerofill DEFAULT '0',
+	PRIMARY KEY (`Id`)
+);
+
+
+
 
 
