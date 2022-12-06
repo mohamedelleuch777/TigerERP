@@ -59,6 +59,7 @@ CREATE TABLE`User` (
 	`Username` VARCHAR(50) CHARACTER SET armscii8 COLLATE armscii8_bin UNIQUE,
 	`Password` VARCHAR(513) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	`WorkerId` INT(16) unsigned zerofill DEFAULT '0' UNIQUE,
+	`Role` VARCHAR(20) CHARACTER SET armscii8 COLLATE armscii8_bin DEFAULT NULL,
 	PRIMARY KEY (`Id`,`Username`,`WorkerId`)
 );
 
