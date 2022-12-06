@@ -4,7 +4,9 @@
   "description": "erp application",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "php -S 0.0.0.0:3000/",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/mohamedelleuch777/TigerERP#readme",
   "dependencies": {
     "body-parser": "^1.20.1",
+    "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
