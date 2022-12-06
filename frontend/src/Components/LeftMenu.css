@@ -1,0 +1,11 @@
+.left-menu {
+    position: fixed;
+    top: 60px;
+    width: 300px;
+    max-width: 400px;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    z-index: 100;
+    border-right: solid 2px #d2dee5;
+}
+

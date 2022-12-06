@@ -1,0 +1,15 @@
+.top-bar {
+    position: fixed;
+    width: 100vw;
+    height: 60px;
+    background-color: #fff;
+    z-index: 101;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 1px 20px -1px #0000003d;
+}
+
+.topbar-logout {
+    margin-right: 30px;
+
+}
