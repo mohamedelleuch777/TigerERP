@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('./middleware/requireAuth');
 const { login, register, updateOneUser, deleteOneUser, getAllUser } = require('./user');
-const { getHome } = require('./home');
+const { getDashboard } = require('./dashboard');
 
 
 router.use(requireAuth)
@@ -31,11 +31,27 @@ router.put('/user', register);
 **************************************************
 **************************************************
 **********                              **********
-**********          HOME API           **********
+**********        DASHBOARD API         **********
 **********                              **********
 **************************************************
 **************************************************
 */
-router.get('/home', getHome);
+router.get('/dashboard', getDashboard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router
+

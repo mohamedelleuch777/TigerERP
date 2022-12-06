@@ -6,6 +6,7 @@ $(document).ready(function(){
         var password = $($('input[type=password]')[0]).val()
         var result = await API_Login(username, password);
         if(result.success) {
+            window.localStorage.setItem("token",result.token);
             window.location.href = "/dashborad.html";
         } else {
             var errorField = $($('#error-field')[0])
