@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRegister } from "../Hooks/useRegister";
-import './Register.css';
+// import './Register.css';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -17,22 +17,60 @@ export default function Register() {
   }
 
   return (
-    <form className="register" onSubmit={handleSubmit}>
-      <h3>Register</h3>
-      <div className="input-container">
-        <label>Email:</label>
-        <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
-      </div>
-      <div className="input-container">
-        <label>Password:</label>
-        <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password}/>
-      </div>
-      <div className="input-container">
-        <label>Confirmation:</label>
-        <input type="password" onChange={(e)=>setConfirmation(e.target.value)} value={confirmation}/>
-      </div>
-      <button disabled={isLoading}>Register</button>
-      {error && <div className="error">{error}</div>}
-    </form>
+    <section class="container">
+        <h2 class="title">Register</h2>
+        <div class="input-field">
+            <h3 class="label">Frist Name</h3>
+            <div class="input-container">
+                <input type="text" name="first-name" placeholder="Type your first name" />
+                <i class="bi-person"></i>
+            </div>
+        </div>
+        
+        <div class="input-field">
+            <h3 class="label">Last Name</h3>
+            <div class="input-container">
+                <input type="text" name="last-name" placeholder="Type your last name" />
+                <i class="bi-person"></i>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <h3 class="label">Username</h3>
+            <div class="input-container">
+                <input type="text" name="username" placeholder="Type your username" />
+                <i class="bi bi-envelope-at"></i>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <h3 class="label">Email</h3>
+            <div class="input-container">
+                <input type="email" placeholder="Type your email" />
+                <i class="bi bi-envelope-at"></i>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <h3 class="label">Password</h3>
+            <div class="input-container">
+                <input type="password" placeholder="Type your password" />
+                <i class="bi-lock"></i>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <h3 class="label">Confirmation</h3>
+            <div class="input-container">
+                <input type="password" placeholder="Type your password confirmation" />
+                <i class="bi-lock"></i>
+            </div>
+        </div>
+
+        <div class="submit">
+            <button id="btn-refister">Register</button>
+        </div>
+        <p id="error-field"></p>
+    </section>
   );
 }

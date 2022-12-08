@@ -1,13 +1,106 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary: #43a7eb;
+  --secondary: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Patrick Hand', cursive;
+}
+
+body.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cecece;
+  height: 100vh;
+}
+
+button {
+  width: 250px;
+  background-color: var(--secondary);
+  border: solid 5px var(--primary);
+  padding: 6px;
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+}
+
+.container {
+  width: 50%;
+  height: min-content;
+  margin: auto;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px -13px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.container .title {
+  font-size: 36px;
+}
+
+.container .submit {
+  margin: 25px auto;
+}
+
+.input-field {
+  text-align: left;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;;
+}
+
+.input-field h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #656565;
+  font-weight: 100;
+}
+
+.input-field input {
+  padding: 5px;
+  border: none;
+  border-bottom: solid 1px #bbb;
+  outline: none;
+  flex: 1;
+}
+
+.input-field input::placeholder {
+  color: #999;
+  font-family: "PatrickHand";
+}
+
+.input-field .input-container{
+  display: flex;
+  flex-flow: row-reverse;
+}
+
+.input-field .input-container i {
+  margin: auto 8px;
+}
+
+.link-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+#error-field {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: solid 1px #f5c6cb;
+  border-radius: 5px;
+  padding: 10px;
 }
