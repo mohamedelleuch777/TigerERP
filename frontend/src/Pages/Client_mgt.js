@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import ItemDetail from "../Components/ItemDetail";
 import { useAuthContext } from "../Hooks/useAuthContext";
 import DataTable from 'react-data-table-component';
+import Card from "../Components/card";
+import Pagination from "../Components/pagination";
 // import { use } from "../../../backend/API";
 // import './Login.css';
 
@@ -114,7 +116,9 @@ export default function ClientManagement() {
   return (
      user && (
         <div style={{width: "100%", height: "100%"}}>
+          <Card title="Clients Management" text="From this table you can manage the list of client:" />
           <DataTable className="table--clients--list" title="Clients List" columns={col} data={data} pagination progressPending={isLoading}/>
+          <Pagination />
           {
           (selectedItem && !isLoading) && 
           <div className="bottom-details">
