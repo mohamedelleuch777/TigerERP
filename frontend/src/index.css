@@ -104,3 +104,22 @@ button:hover {
   border-radius: 5px;
   padding: 10px;
 }
+
+div.bottom-details {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+div.bottom-details > div {
+  flex: 1;
+}
+
+div.bottom-details > div .detail-item {
+  display: flex;
+  flex-direction: row;
+}
+
+div.bottom-details > div .detail-item * {
+  flex: 1;
+}

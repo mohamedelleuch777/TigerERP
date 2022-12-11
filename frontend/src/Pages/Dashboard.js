@@ -16,7 +16,7 @@ export default function Dashboard() {
      user && (
 
 
-        <div class="container">
+        <div className="container">
             <h1>this is dashboard page</h1>
         </div>
      )
