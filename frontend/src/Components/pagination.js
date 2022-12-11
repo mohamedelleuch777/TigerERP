@@ -63,6 +63,6 @@ const btnStyle = {
   const btn2Style = {
     border: "1px solid #ccc",
     borderRadius: 5,
-    top: -7,
+    top: -4,
     marginLeft: 5
   }

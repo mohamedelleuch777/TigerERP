@@ -4,6 +4,7 @@ import { useAuthContext } from "../Hooks/useAuthContext";
 import DataTable from 'react-data-table-component';
 import Card from "../Components/card";
 import Pagination from "../Components/pagination";
+import Loading from "../Components/loading";
 // import { use } from "../../../backend/API";
 // import './Login.css';
 
@@ -108,40 +109,47 @@ export default function ClientManagement() {
     let style = document.createElement("style");
     style.id = "my-style";
     document.querySelector("body").appendChild(style);
-    document.querySelector('div.rdt_Table[role="table"]').addEventListener('click',clickHandler)
+    let table = document.querySelector('div.rdt_Table[role="table"]');
+    table && table.addEventListener('click',clickHandler)
     user && getClientistPage();  
-    return document.querySelector('div.rdt_Table[role="table"]').addEventListener('click',clickHandler)
-  },[]);
+    // return table && table.addEventListener('click',clickHandler)
+  },[isLoading]);
 
   return (
      user && (
-        <div style={{width: "100%", height: "100%"}}>
+      <>
+        {isLoading && <Loading />}
+        {!isLoading && <div style={{width: "100%", height: "100%"}}>
           <Card title="Clients Management" text="From this table you can manage the list of client:" />
-          <DataTable className="table--clients--list" title="Clients List" columns={col} data={data} pagination progressPending={isLoading}/>
+          <DataTable className="table--clients--list" title="Clients List" columns={col} data={data} showPaginationBottom={false} progressPending={isLoading}/>
           <Pagination />
           {
           (selectedItem && !isLoading) && 
-          <div className="bottom-details">
-            <div className="left">
-              <ItemDetail label="Code client" value={selectedItem.code} />
-              <ItemDetail label="First Name" value={selectedItem.fname} />
-              <ItemDetail label="Last Name" value={selectedItem.lname} />
-              <ItemDetail label="Email" value={selectedItem.email} />
-              <ItemDetail label="Phone" value={selectedItem.phone} />
-              <ItemDetail label="Description" value={selectedItem.description} />
-            </div> 
-            <div className="right">
-              <ItemDetail label="Address" value={selectedItem.address} />
-              <ItemDetail label="District" value={selectedItem.district} />
-              <ItemDetail label="Province" value={selectedItem.province} />
-              <ItemDetail label="Country" value={selectedItem.country} />
-              <ItemDetail label="Postal code" value={selectedItem.postalCode} />
-              <ItemDetail label="Taxe Number" value={selectedItem.taxNumber} />
+          <>
+            <Card title="Client Infromations:" text="In the following field you can see the details and informations of the selecged client" />
+            <div className="bottom-details">
+              <div className="left">
+                <ItemDetail label="Code client" value={selectedItem.code} />
+                <ItemDetail label="First Name" value={selectedItem.fname} />
+                <ItemDetail label="Last Name" value={selectedItem.lname} />
+                <ItemDetail label="Email" value={selectedItem.email} />
+                <ItemDetail label="Phone" value={selectedItem.phone} />
+                <ItemDetail label="Description" value={selectedItem.description} />
+              </div> 
+              <div className="right">
+                <ItemDetail label="Address" value={selectedItem.address} />
+                <ItemDetail label="District" value={selectedItem.district} />
+                <ItemDetail label="Province" value={selectedItem.province} />
+                <ItemDetail label="Country" value={selectedItem.country} />
+                <ItemDetail label="Postal code" value={selectedItem.postalCode} />
+                <ItemDetail label="Taxe Number" value={selectedItem.taxNumber} />
+              </div>
             </div>
-          </div>
+          </>
           }
           Client information
-        </div>
+        </div>}
+      </>
      )
   );
 }

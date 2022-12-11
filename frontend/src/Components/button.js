@@ -37,9 +37,15 @@ export default function Button (props) {
     }
 
     return (
-        <button onClick={props.onClick} className={styles.mainStyle+getBtnType()} style={props.style}>
-            <Icon style={style} icon={props.icon}/>
-            {props.label}
+        <button 
+            onClick={props.onClick} 
+            className={styles.mainStyle+getBtnType()} 
+            style={props.style}
+            id={props.id}
+            disabled={props.disabled}
+        >
+                <Icon style={style} icon={props.icon}/>
+                {props.label}
         </button>
     )
 }

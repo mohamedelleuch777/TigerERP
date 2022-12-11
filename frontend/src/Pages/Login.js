@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../Hooks/useAuthContext";
 import { useLogin } from "../Hooks/useLogin";
+import Button from "../Components/button";
 // import './Login.css';
 
 export default function Login() {
@@ -53,7 +54,14 @@ export default function Login() {
               </div>
           </div>
           <div className="submit">
-              <button disabled={isLoading} id="btn-submit-login" onClick={btnLoginClicked}>Login</button>
+              <Button 
+                disabled={isLoading} id="btn-submit-login" 
+                style={btnStyle} 
+                label="Login" 
+                icon="box-arrow-in-right" 
+                onClick={btnLoginClicked} 
+                type="primary" 
+              />
           </div>
           {error && <p id="error-field">{error}</p>}
           <div className="link-area">
@@ -63,4 +71,12 @@ export default function Login() {
       </div>
      )
   );
+}
+
+
+
+const btnStyle = {
+  margin: "auto",
+  height: "auto",
+  width: "100%",
 }

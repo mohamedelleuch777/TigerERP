@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { useLogout } from '../Hooks/useLogout';
+import Button from './button';
 import './Navbar.css'
 
 const Navbar = () => {
@@ -19,7 +20,8 @@ const Navbar = () => {
             { user && (
                 <div>
                     <span>{user.data}</span>
-                    <button className="topbar-logout" onClick={handleClick}>Logout</button>
+                    {/* <button className="topbar-logout" onClick={handleClick}>Logout</button> */}
+                    <Button style={btnStyle} label="Logout" icon="box-arrow-right" onClick={handleClick} type="primary" />
                 </div>
             )}
             { !user && (
@@ -34,3 +36,9 @@ const Navbar = () => {
 
 
 export default Navbar;
+
+const btnStyle = {
+    margin: "auto",
+    height: "auto",
+    width: 340,
+}

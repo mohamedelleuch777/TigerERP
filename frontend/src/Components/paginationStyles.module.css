@@ -288,7 +288,11 @@
     justify-content: space-between;
     padding: 6px 6px 0;
     background-color: #efefef;
+    background-color: #fff;
     border-radius: 5px;
+    border-top: solid 4px #ccc;
+    border-bottom: solid 4px #ccc;
+    border-radius: 0;
   }
 
   th, td, tr {
