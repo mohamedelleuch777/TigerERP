@@ -116,7 +116,7 @@ export default function ClientManagement() {
         <div style={{width: "100%", height: "100%"}}>
           <DataTable className="table--clients--list" title="Clients List" columns={col} data={data} pagination progressPending={isLoading}/>
           {
-          selectedItem && 
+          (selectedItem && !isLoading) && 
           <div className="bottom-details">
             <div className="left">
               <ItemDetail label="Code client" value={selectedItem.code} />
