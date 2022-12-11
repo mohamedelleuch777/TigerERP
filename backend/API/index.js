@@ -3,6 +3,7 @@ const router = express.Router();
 const { requireAuth } = require('./middleware/requireAuth');
 const { login, register, updateOneUser, deleteOneUser, getAllUser } = require('./user');
 const { getDashboard } = require('./dashboard');
+const { getClientsList } = require('./client');
 
 
 router.use(requireAuth)
@@ -37,6 +38,19 @@ router.put('/user', register);
 **************************************************
 */
 router.get('/dashboard', getDashboard);
+
+
+
+/*
+**************************************************
+**************************************************
+**********                              **********
+**********          CLIENT API          **********
+**********                              **********
+**************************************************
+**************************************************
+*/
+router.post('/client', getClientsList);
 
 
 
